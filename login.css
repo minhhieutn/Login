@@ -13,11 +13,10 @@ body {
   overflow: hidden;
 }
 .container {
-  width: 100%;
-  max-width: 1200px;
-  height: 680px;
+  width: 100vw;
+  height: 100vh;
   background: #fff;
-  border-radius: 12px;
+  border-radius: 0px;
   overflow: hidden;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
   display: grid;
