@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LOGIN</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="login_section">
+        <div class="login_form">
+          <h1>Login</h1>
+          <p>Enter your account and password to login</p>
+        </div>
+        <form id="loginform">
+          <div class="form-group">
+            <label for="account">Account</label>
+            <input
+              type="text"
+              id="account"
+              placeholder="Enter account"
+              autocapitalize="username"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter password"
+                autocomplete="current-password"
+              />
+              <div class="toggle-password" id="togglePassword">Show</div>
+            </div>
+          </div>
+          <div class="forgot-password">
+            <a href="forgot.html">Forgot your password?</a>
+          </div>
+          <button type="submit" class="login-submit">Login</button>
+        </form>
+      </div>
+      <div class="image-section">
+        <div class="main-image"></div>
+      </div>
+    </div>
+    <script src="login.js"></script>
+  </body>
+</html>
