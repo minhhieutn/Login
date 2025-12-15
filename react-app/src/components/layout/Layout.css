@@ -1,0 +1,39 @@
+#root {
+  background-color: gainsboro;
+}
+.Sider_form {
+  margin-bottom: 4px;
+  padding: 0;
+}
+.Sider_text {
+  transition: "opacity 0.3s";
+  pointer-events: "none";
+  background-color: white;
+  padding: 8px 16px 4px 16px;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #8c8c8c;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.Sider_item {
+  height: "100%";
+  font-size: 13px;
+  border-right: 0;
+}
+.Form {
+  background-color: #fff;
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  font-size: 15px;
+}
+.Button_Hide_Sider:hover {
+  border: none;
+  outline: none;
+}
+.Button_Hide_Sider:focus {
+  border: none;
+  outline: none;
+}
