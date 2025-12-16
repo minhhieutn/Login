@@ -1,8 +1,6 @@
-import Hheader from "./components/layout/Header";
 import "./App.css";
 import { ConfigProvider } from "antd";
 import MainLayout from "./components/layout/MainLayout";
-import { Provider } from "react-redux";
 
 function App() {
   return (

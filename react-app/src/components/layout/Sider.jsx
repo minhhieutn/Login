@@ -4,15 +4,7 @@ import {
   CarOutlined,
   DashboardOutlined,
   TrademarkCircleOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
-import React from "react";
-
-import { Button } from "antd";
 import { Layout, Menu } from "antd";
 const { Sider } = Layout;
 const UserSider = ({ collapsed, onCollapse }) => {
@@ -106,7 +98,7 @@ const UserSider = ({ collapsed, onCollapse }) => {
           color: "#1890ff",
         }}
       >
-        PCS
+        PMH
       </div>
       <div className="Sider_form">
         <p style={{ opacity: collapsed ? 0 : 1 }} className="Sider_text">

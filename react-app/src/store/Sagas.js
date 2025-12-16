@@ -1,8 +1,13 @@
-import { takeLatest, put, select } from "redux-saga/effects";
+import { takeLatest, put, select, delay } from "redux-saga/effects";
 import {
   FILTER_BY_DATE_RANGE,
   FILTER_BY_SERVICE,
   FILTER_SUCCESS,
+  CREATE_SHIPMENT_SUCCESS,
+  CREATE_SHIPMENT_REQUEST,
+  LOAD_INITIAL_DATA_FAILURE,
+  LOAD_INITIAL_DATA_SUCCESS,
+  LOAD_INITIAL_DATA_REQUEST,
 } from "../store/Actions";
 import { DataSource } from "../data/Data_souce";
 const getFilterState = (state) => ({
@@ -33,12 +38,41 @@ function* filterSagaData() {
         return itemDate >= startDate && itemDate <= endDate;
       });
     }
+    yield delay(2000);
     yield put({ type: FILTER_SUCCESS, payload: filteredData });
   } catch (error) {
     console.error("Error in filterSagaData:", error);
   }
 }
+function* loadInitialDataSaga() {
+  try {
+    yield delay(3000);
+    yield put({ type: LOAD_INITIAL_DATA_SUCCESS, payload: DataSource });
+  } catch (error) {
+    yield put({ type: LOAD_INITIAL_DATA_FAILURE, payload: error.message });
+  }
+}
+
+function* createShipmentSaga(action) {
+  try {
+    const newShipment = {
+      key: Date.now().toString(),
+      ...action.payload,
+      prepaid: true,
+      serviec: true, // true = SPX, false = PHT
+      datetime: new Date().toLocaleString("vi-VN"),
+    };
+
+    yield delay(2000);
+
+    yield put({ type: CREATE_SHIPMENT_SUCCESS, payload: newShipment });
+  } catch (error) {
+    console.error("Lỗi tạo shipment:", error);
+  }
+}
 
 export function* watchFilter() {
   yield takeLatest([FILTER_BY_DATE_RANGE, FILTER_BY_SERVICE], filterSagaData);
+  yield takeLatest(LOAD_INITIAL_DATA_REQUEST, loadInitialDataSaga);
+  yield takeLatest(CREATE_SHIPMENT_REQUEST, createShipmentSaga);
 }

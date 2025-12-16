@@ -1,31 +1,6 @@
-import React, { Children } from "react";
 import "./Layout.css";
-import {
-  SearchOutlined,
-  ReloadOutlined,
-  CarOutlined,
-  DashboardOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-  TrademarkCircleOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import {
-  Breadcrumb,
-  Collapse,
-  DatePicker,
-  Dropdown,
-  Input,
-  Layout,
-  Menu,
-  Form,
-  Select,
-  AutoComplete,
-  Space,
-  Button,
-} from "antd";
+import { DatePicker, Input, Form, Select } from "antd";
 import { useDispatch } from "react-redux";
-import { DataSource } from "../../data/Data_souce";
 import { filterByDateRange } from "../../store/Actions";
 import { filterByService } from "../../store/Actions";
 const InputForm = () => {

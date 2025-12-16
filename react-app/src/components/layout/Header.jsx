@@ -1,45 +1,62 @@
-import React, { Children } from "react";
 import "./Layout.css";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  SearchOutlined,
-  ReloadOutlined,
-  CarOutlined,
-  DashboardOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-  TrademarkCircleOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import {
-  Breadcrumb,
-  Collapse,
-  DatePicker,
-  Dropdown,
-  Input,
-  Layout,
-  Menu,
-  theme,
-  Form,
-  Select,
-  AutoComplete,
-  Space,
-  Button,
-} from "antd";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { Breadcrumb, Layout, theme, Form, Button, Modal, message } from "antd";
 import UserSider from "./Sider";
 import SearchBar from "./Search";
 import UserProfile from "./UserProfile";
 import InputForm from "./InputForm";
 import USerTable from "./Table_Form";
 import { useState } from "react";
+import CreateNewShipment from "./Modal";
+
+import { useDispatch } from "react-redux";
+import { createShipment } from "../../store/Actions";
 const { Header, Content } = Layout;
 
 const Hheader = () => {
+  const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const handleCreateShipment = () => {
+    form
+      .validateFields()
+      .then((values) => {
+        const now = new Date();
+        const formattedDateTime = now.toLocaleString("vi-VN", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+        });
+        const newShipment = {
+          ...values,
+          datetime: formattedDateTime,
+          key: Date.now().toString(), // key unique tạm thời
+          // Các field mặc định nếu cần
+          trackingNumber: values.trackingNumber || `SPX${Date.now()}`, // tự sinh nếu không nhập
+          referenceNo: values.referenceNo || "",
+          serviec: true,
+          prepaid: true,
+          noOfPackage: values.noOfPackage || 1,
+          weight: values.weight || "1kg",
+          codAmount: values.codAmount || "0đ",
+        };
+        dispatch(createShipment(newShipment));
+        message.success("Shipment created successfully");
+        setIsModalOpen(false);
+        form.resetFields();
+      })
+      .catch((info) => {
+        console.log("Failed to create shipment:", info);
+      });
+  };
   return (
     <Layout>
       <UserSider collapsed={collapsed} onCollapse={setCollapsed} />
@@ -110,6 +127,7 @@ const Hheader = () => {
                 className="Button_Hide_Sider"
                 type="primary"
                 style={{ width: 200 }}
+                onClick={() => setIsModalOpen(true)}
               >
                 Create new Shipment
               </Button>
@@ -118,6 +136,19 @@ const Hheader = () => {
           <InputForm />
           <USerTable />
         </Layout>
+        <Modal
+          title="Create New Shipment"
+          width={1000}
+          open={isModalOpen}
+          onOk={handleCreateShipment}
+          onCancel={() => {
+            setIsModalOpen(false), form.resetFields();
+          }}
+          okText="Create"
+          cancelText="Cancel"
+        >
+          <CreateNewShipment form={form} />
+        </Modal>
       </Layout>
     </Layout>
   );

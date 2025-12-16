@@ -1,14 +1,6 @@
-import React, { Children, useState } from "react";
 import "./Layout.css";
-import {
-  CarOutlined,
-  DashboardOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-  TrademarkCircleOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import { Breadcrumb, Collapse, Dropdown, Input, Layout, Menu } from "antd";
+import { Input } from "antd";
+import { useState } from "react";
 const { Search } = Input;
 const SearchBar = () => {
   const [loading, setLoading] = useState(false);

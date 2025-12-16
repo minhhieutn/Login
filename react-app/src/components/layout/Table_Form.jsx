@@ -1,7 +1,14 @@
-import { Badge, Form, Tabs } from "antd";
+import { Badge, Tabs } from "antd";
+import React from "react";
+import { loadInitialData } from "../../store/Actions";
+import { useDispatch } from "react-redux";
 import Table_Data from "./Table";
 
 const USerTable = () => {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(loadInitialData());
+  }, [dispatch]);
   const item = [
     {
       key: "1",

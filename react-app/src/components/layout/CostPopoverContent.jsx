@@ -1,5 +1,5 @@
 import { EyeOutlined } from "@ant-design/icons";
-import { Space, Tag, Typography, Popover } from "antd";
+import { Space, Tag } from "antd";
 import Text from "antd/es/typography/Text";
 const CostPopoverContent = ({ record }) => (
   <div style={{ width: 300, padding: "12px 0" }}>
